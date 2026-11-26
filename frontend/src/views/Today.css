@@ -65,3 +65,4 @@
   .sf-tile{min-height:124px}
   .sf-go{max-width:320px}
 }
+.sf-test{flex:none;width:auto;min-height:36px;padding:4px 12px;font-size:var(--fs-footnote);margin-inline-start:auto;margin-inline-end:8px}

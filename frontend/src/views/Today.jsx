@@ -15,6 +15,7 @@ import { startOrPreview } from '../components/StartSheets.jsx'
 import { loadWeeklyPlan, markLoaded, markedLoaded } from '../sachinfit/plan.js'
 import { todaySession, stepsToday, sleepHours, activeKcal, stepBaseline, suggestedStepTarget, progressOf } from '../sachinfit/today.js'
 import { DIET_ITEMS, readDiet, dietDay, dietScore, toggleDietItem, readTargets, saveTargets } from '../sachinfit/diet.js'
+import { hasTestData } from '../sachinfit/test-data.js'
 import './Today.css'
 
 // The SachinFit copy goes through t() at run time, so a language pack can translate it later,
@@ -89,6 +90,7 @@ export default function Today() {
           <div className="sub">{dateLine}</div>
           <h1>{tr('Today')}</h1>
         </div>
+        {hasTestData(S) && <button type="button" className="btn tinted sf-test" onClick={() => nav('/test-data')}>{tr('Test data')}</button>}
         <button type="button" className="iconbtn" onClick={() => nav('/home')} aria-label={tr('Open the full home screen')}><Icon name="grid" /></button>
       </header>
 

@@ -78,3 +78,13 @@ heart rate, weight. Then in SachinFit: Settings, Integrations, Health Connect, t
 
 Known limits in Phase 2: diet ticks and targets live on the device only (synced in Phase 4, after
 the sync-format change is agreed); active calories show once Phase 3 reads them.
+
+## Test data (dev builds only)
+
+With `npm run dev`, open `http://localhost:5173/#/test-data` and tap **Add test data**: the last 14
+days of the weekly plan as logged workouts (one Thursday missed), 12 morning weigh-ins from about
+110 kg down to about 108.5 kg, and diet ticks for those days. Today is left empty. Every workout
+carries the note "SachinFit test data", every weigh-in is marked as from the test seed, and Today
+shows a **Test data** button while any of it is there. **Remove test data** on the same page takes
+out only what the seed added; your own entries stay. The page does not exist in production or
+Android builds (unless built with `VITE_SACHINFIT_TEST=1`).

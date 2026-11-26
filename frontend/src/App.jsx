@@ -118,6 +118,9 @@ const Muscles = lazyView(() => import('./views/Muscles.jsx'))
 const Community = lazyView(() => import('./views/Community.jsx'))
 // SachinFit F6 (docs/dev/SACHINFIT_DESIGN.md): the Today screen, the screen the app opens on.
 const Today = lazyView(() => import('./views/Today.jsx'))
+// SachinFit test data (seed and wipe), only in dev builds or with VITE_SACHINFIT_TEST=1.
+const SF_TEST = import.meta.env.DEV || import.meta.env.VITE_SACHINFIT_TEST === '1'
+const SachinFitTestData = lazyView(() => import('./views/SachinFitTestData.jsx'))
 const SettingsRoute = lazyView(() => import('./views/Settings.jsx').then(m => ({ default: m.SettingsRoute })))
 // The app tour's overlay (components/Tour.jsx): fetched when it opens, never before.
 const loadTour = () => import('./components/Tour.jsx')
@@ -399,6 +402,7 @@ function Shell() {
   const view = l => (!authed ? <Login /> : needsMobileOnboarding ? <MobileOnboarding /> : permSteps ? <PermissionSteps /> : (
     <Routes location={l}>
       <Route path="/today" element={<Today />} />
+      {SF_TEST && <Route path="/test-data" element={<SachinFitTestData />} />}
       <Route path="/home" element={<Home />} />
       {/* A module switched off (Settings → Modules, lib/modules.js) takes its screens with it: the
           route falls through to the catch-all redirect below. The data stays where it is. */}
