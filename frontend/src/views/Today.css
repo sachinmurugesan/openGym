@@ -1,0 +1,68 @@
+/* SachinFit Today screen (views/Today.jsx, docs/dev/SACHINFIT_DESIGN.md). openGym's own tokens
+   only (index.css :root): no new colours, fonts or radii. Mobile first at 360 to 412 px; the
+   primary action sits low on the card, inside a thumb's reach, and every target is 48 px or more. */
+
+.sf-today{max-width:640px;margin:0 auto}
+.sf-hdr{margin-bottom:14px}
+.sf-grid{display:flex;flex-direction:column;gap:12px}
+
+/* Today's session: the one thing to do. */
+.sf-session{padding:18px var(--pad) var(--pad);display:flex;flex-direction:column;gap:6px}
+.sf-kicker{font-size:var(--fs-footnote);font-weight:600;color:var(--acc-ink);letter-spacing:var(--ls-small);text-transform:uppercase}
+.sf-session.rest .sf-kicker{color:var(--label-2)}
+.card h2.sf-session-title{text-transform:none;color:var(--label);margin:0;font-size:var(--fs-title2);line-height:var(--lh-title);font-weight:700;letter-spacing:var(--ls-title);overflow-wrap:anywhere}
+.sf-session-sub{color:var(--label-2);font-size:var(--fs-subhead);line-height:var(--lh-small)}
+.sf-go{margin-top:12px;min-height:56px;font-size:var(--fs-title3)}
+.sf-alt{min-height:48px;margin-top:4px}
+.sf-done{display:flex;align-items:center;gap:8px;margin-top:10px;min-height:48px;font-weight:600;color:var(--green)}
+.sf-done .icn{font-size:1.375rem}
+
+/* Four numbers, two by two. */
+.sf-tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sf-tile{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:100px;padding:14px;border-radius:var(--r-card);background:var(--surface);color:var(--label);text-align:start;width:100%}
+.sf-tile.tap{transition:transform var(--fast) var(--ease)}
+.sf-tile.tap:active{transform:scale(var(--press-scale-card))}
+.sf-tile-lbl{display:flex;align-items:center;gap:6px;font-size:var(--fs-footnote);font-weight:600;color:var(--label-2)}
+.sf-tile-lbl .icn{font-size:1.125rem}
+.sf-tile-val{font-size:2rem;line-height:1.05;font-weight:700;letter-spacing:var(--ls-large);font-variant-numeric:tabular-nums}
+.sf-tile-val small{font-size:var(--fs-subhead);font-weight:600;color:var(--label-2);margin-inline-start:3px;letter-spacing:0}
+.sf-tile-foot{font-size:var(--fs-caption);color:var(--label-dim);line-height:var(--lh-small)}
+.sf-bar{display:block;width:100%;height:4px;border-radius:2px;background:var(--surface-3);overflow:hidden;margin-top:2px}
+.sf-bar>span{display:block;height:100%;transform-origin:left center;transition:transform var(--med) var(--ease)}
+[dir="rtl"] .sf-bar>span{transform-origin:right center}
+
+.sf-target{padding:var(--pad);display:flex;flex-direction:column;gap:8px}
+.sf-target-row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:600}
+.sf-target-row>span{white-space:nowrap}
+.sf-target-row .stepper{flex:1;max-width:240px}
+.sf-suggest{min-height:44px;justify-content:flex-start;padding-inline:0}
+
+/* The checklist: each row is the checkbox, the full width of the card. */
+.sf-check{padding:6px 0}
+.card h2.sf-check-title{text-transform:none;color:var(--label);margin:0;display:flex;justify-content:space-between;align-items:baseline;padding:10px var(--pad) 6px;font-size:var(--fs-title3);font-weight:700;letter-spacing:var(--ls-title)}
+.sf-check-title span{font-size:var(--fs-subhead);color:var(--label-2);font-weight:600;font-variant-numeric:tabular-nums}
+.sf-check ul{list-style:none;margin:0;padding:0}
+.sf-check li+li .sf-row{box-shadow:inset 0 var(--hair) 0 var(--sep)}
+.sf-row{display:flex;align-items:center;gap:14px;width:100%;min-height:56px;padding:8px var(--pad);background:none;color:var(--label);text-align:start;font-size:var(--fs-body);transition:background var(--fast)}
+.sf-row:active{background:var(--press-fill)}
+.sf-box{width:28px;height:28px;flex:none;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 2px var(--grey);color:transparent;transition:background var(--fast),box-shadow var(--fast),color var(--fast)}
+.sf-box .icn{font-size:1rem;--icon-stroke:2.6}
+.sf-row.on .sf-box{background:var(--acc);box-shadow:none;color:var(--on-acc)}
+.sf-row.on .sf-row-lbl{color:var(--label-2)}
+.sf-row:focus-visible,.sf-tile.tap:focus-visible{outline:2px solid var(--acc-ink);outline-offset:-2px}
+
+@media (prefers-reduced-motion:reduce){
+  .sf-tile.tap,.sf-bar>span,.sf-row,.sf-box{transition:none}
+}
+
+/* The web dashboard: session and numbers on the left, the checklist beside them. */
+@media (min-width:1000px){
+  .sf-today{max-width:1040px}
+  .sf-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-auto-flow:row dense;gap:16px;align-items:start}
+  .sf-session,.sf-tiles,.sf-target{grid-column:1}
+  .sf-check{grid-column:2;grid-row:1 / span 3}
+  .sf-tiles{grid-template-columns:repeat(4,1fr)}
+  .sf-tile{min-height:124px}
+  .sf-go{max-width:320px}
+}
+.sf-test{flex:none;width:auto;min-height:36px;padding:4px 12px;font-size:var(--fs-footnote);margin-inline-start:auto;margin-inline-end:8px}
