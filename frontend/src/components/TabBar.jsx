@@ -38,9 +38,10 @@ export default function TabBar({ onStart, onPick }) {
   if (!user && !isGuest) return null
   const cur = loc.pathname.split('/')[1] || 'home'
   // A screen without a tab of its own lights the tab it is opened from (Muscles from both).
-  const PARENT = { history: 'stats', 'structural-balance': 'stats', tools: 'stats', 'progress-photos': 'stats', measurements: 'stats', settings: 'home', checkin: 'home', muscles: 'library', trainer: 'home' }
+  const PARENT = { history: 'stats', 'structural-balance': 'stats', tools: 'stats', 'progress-photos': 'stats', measurements: 'stats', settings: 'home', today: 'home', checkin: 'home', muscles: 'library', trainer: 'home' }
   const parent = cur === 'muscles' && loc.state?.from === '/stats' ? 'stats' : PARENT[cur]
   const on = k => cur === k || parent === k
+  // SachinFit: Home opens Today (views/Today.jsx); on openGym's full Home it stays a re-tap there.
 
   // Root tabs are peers, not another level to unwind with Android Back. The tab you are already
   // on takes you to the top of its page instead (lib/scroll-top.js).
@@ -81,7 +82,7 @@ export default function TabBar({ onStart, onPick }) {
 
   return (
     <nav id="tabbar">
-      <Tab active={on('home')} icon="house" label={t('Home')} dot={trouble} onClick={() => switchTab('/home')} tour="tab-home" />
+      <Tab active={on('home')} icon="house" label={t('Home')} dot={trouble} onClick={() => switchTab(cur === 'home' ? '/home' : '/today')} tour="tab-home" />
       <Tab active={on('plan')} icon="calendar" label={t('Plan')} onClick={() => switchTab('/plan')} tour="tab-plan" />
       {/* On the workout screen itself there is nothing to resume, so the button reads as the
           tab it is and stays lit (#29); anywhere else it brings you back to the exercise you

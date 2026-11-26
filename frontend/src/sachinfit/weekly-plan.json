@@ -1,0 +1,62 @@
+{
+  "title": "SachinFit weekly plan",
+  "author": { "name": "sachin" },
+  "license": "CC0-1.0",
+  "added": "2026-11-26",
+  "language": "en",
+  "goal": "fatloss",
+  "level": "beginner",
+  "split": "upper-lower",
+  "duration": 40,
+  "description": "Four machine-based gym days and two light days, Monday to Saturday. 3 sets of 10 to 12, 60 to 90 seconds rest, add weight when every set reaches 12.",
+  "sessions": [
+    { "key": "upperA", "name": "Upper A: chest and back", "kind": "gym", "minutes": 40, "exercises": [
+      { "id": "0576", "sets": 3, "reps": 12, "repsMin": 10, "rest": 90 },
+      { "id": "2291", "sets": 3, "reps": 12, "repsMin": 10, "rest": 90 },
+      { "id": "0861", "sets": 3, "reps": 12, "repsMin": 10, "rest": 90 },
+      { "id": "1299", "sets": 3, "reps": 12, "repsMin": 10, "rest": 90 },
+      { "id": "5656", "sets": 3, "reps": 12, "repsMin": 10, "rest": 60 },
+      { "id": "0798", "sets": 1, "min": 5, "note": "Easy cycle" }
+    ] },
+    { "key": "lowerA", "name": "Lower A: legs", "kind": "gym", "minutes": 40, "exercises": [
+      { "id": "0739", "sets": 3, "reps": 12, "repsMin": 10, "rest": 90 },
+      { "id": "0586", "sets": 3, "reps": 12, "repsMin": 10, "rest": 90 },
+      { "id": "0585", "sets": 3, "reps": 12, "repsMin": 10, "rest": 90 },
+      { "id": "0594", "sets": 3, "reps": 12, "repsMin": 10, "rest": 60 },
+      { "id": "0598", "sets": 3, "reps": 12, "repsMin": 10, "rest": 60 },
+      { "id": "0798", "sets": 1, "min": 5, "note": "Easy cycle" }
+    ] },
+    { "key": "pool", "name": "Pool walking", "kind": "light", "minutes": 25, "exercises": [
+      { "id": "2258", "sets": 1, "min": 25, "speed": 2, "note": "Shallow end of the pool. Stay where you can stand." }
+    ] },
+    { "key": "upperB", "name": "Upper B: shoulders and arms", "kind": "gym", "minutes": 40, "exercises": [
+      { "id": "1454", "sets": 3, "reps": 12, "repsMin": 10, "rest": 90 },
+      { "id": "0218", "sets": 3, "reps": 12, "repsMin": 10, "rest": 90 },
+      { "id": "0178", "sets": 3, "reps": 12, "repsMin": 10, "rest": 60 },
+      { "id": "0201", "sets": 3, "reps": 12, "repsMin": 10, "rest": 60 },
+      { "id": "0294", "sets": 3, "reps": 12, "repsMin": 10, "rest": 60 },
+      { "id": "0798", "sets": 1, "min": 5, "note": "Easy cycle" }
+    ] },
+    { "key": "lowerB", "name": "Lower B: legs and core", "kind": "gym", "minutes": 40, "exercises": [
+      { "id": "0739", "sets": 3, "reps": 12, "repsMin": 10, "rest": 90, "note": "Feet high on the platform" },
+      { "id": "0585", "sets": 3, "reps": 12, "repsMin": 10, "rest": 90 },
+      { "id": "0599", "sets": 3, "reps": 12, "repsMin": 10, "rest": 90 },
+      { "id": "0597", "sets": 3, "reps": 12, "repsMin": 10, "rest": 60 },
+      { "id": "1202", "sets": 3, "sec": 30, "rest": 60 },
+      { "id": "0276", "sets": 2, "reps": 10, "rest": 60 }
+    ] },
+    { "key": "walk", "name": "Long walk", "kind": "light", "minutes": 40, "exercises": [
+      { "id": "2258", "sets": 1, "min": 40, "speed": 5 }
+    ] },
+    { "key": "circuit", "name": "Light circuit", "kind": "light", "minutes": 35, "exercises": [
+      { "id": "0576", "sets": 2, "reps": 12, "rest": 45 },
+      { "id": "2291", "sets": 2, "reps": 12, "rest": 45 },
+      { "id": "0739", "sets": 2, "reps": 12, "rest": 45 },
+      { "id": "1454", "sets": 2, "reps": 12, "rest": 45 },
+      { "id": "0861", "sets": 2, "reps": 12, "rest": 45 },
+      { "id": "3666", "sets": 1, "min": 10, "speed": 4.5 }
+    ] }
+  ],
+  "schedule": [[1, "upperA"], [2, "lowerA"], [3, "pool"], [4, "upperB"], [5, "lowerB"], [6, "walk"]],
+  "alternatives": { "6": ["circuit"] }
+}
