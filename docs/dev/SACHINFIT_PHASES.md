@@ -1,5 +1,15 @@
 # SachinFit: running it and testing each phase
 
+## Phase plan
+
+| Phase | Scope | Status |
+| --- | --- | --- |
+| 1. Fork and run | Fork runs on the web and the phone | Done |
+| 2. Plan and Today | F8 weekly plan, F6 Today screen | Done, in review |
+| 3. Watch data | F7 daily activity sync (steps, active and total kcal, sleep, watch exercise), weigh-ins from Health Connect | Next, waits for "build" |
+| 4. Diet and review | F9 checklist plus calorie tracking (meal log, saved meals, eaten / burned / remaining on Today), F10 weekly review with average kcal and protein, streaks | After 3 |
+| 5. Goal unlock | F11 activity heatmap, locked until a weigh-in at or below 99 kg, then unlocked for good | Last |
+
 ## Phase 1: fork and run
 
 ### Web dashboard on your computer (Docker)

@@ -2,7 +2,7 @@
 
 Nov 26, 2026 · @sachin
 
-> Repo copy. The uploaded original is unchanged. Changed here on 26 Nov 2026: F9 is now "diet checklist plus calorie tracking" (feature table, data records, Phase 4, master prompt).
+> Repo copy. The uploaded original is unchanged. Changed here on 26 Nov 2026: F9 is now "diet checklist plus calorie tracking" (feature table, data records, Phase 4, master prompt), and F11 moves to a last phase and stays locked until a weigh-in of 99 kg or less.
 
 ## Summary
 
@@ -32,6 +32,7 @@ The biggest risk is building an app instead of training. openGym already works t
 | openGym is large (about 22,800 files) and moves fast | An AI agent can break things, and upstream merges get painful | Add features as new files and views, touch core files as little as possible, run the existing tests before every commit. |
 | Samsung Health must share data with Health Connect | No steps or calories arrive | One-time setup on the phone: Samsung Health, Settings, Health Connect, allow steps, exercise, sleep, heart rate, weight. |
 | Steps and daily calories may not be shown yet | The headline feature is missing | The Android manifest already requests `READ_STEPS`, `READ_SLEEP` and `READ_EXERCISE`. The agent must first check what `frontend/src/lib/health-read.js` actually reads. |
+| HealthifyMe scale weight may not reach Health Connect | The 99 kg unlock never sees a weigh-in | openGym already reads weight from Health Connect. HealthifyMe is a Health Connect partner, but published lists show it writing food and steps, not weight. Check once on the phone (Health Connect, Data and access, Weight: is HealthifyMe listed?). If not, log the weigh-in in SachinFit (about 5 seconds) or in Samsung Health. |
 | Calorie tracking becomes a chore | Logging stops after a week | Saved meals log in one tap; foods are entered once. openNutrition (openGym's sister app, docs/dev/SISTER_APPS.md) was checked: openGym can already read its daily totals, but it is in private beta, needs its own server, and the meal logging would happen in a second app. Hand-entered foods in SachinFit are less work now; the openNutrition link stays an option later. |
 | Too many numbers on screen | You stop opening the app | The home screen shows four numbers and one checklist, nothing else. |
 
@@ -67,7 +68,7 @@ Most of the gym side already exists in openGym; the build work is the five rows 
 | F8 | Preloaded weekly plan | New | The Monday-to-Saturday template below, shipped as a routine file and loaded on first run. |
 | F9 | Diet checklist plus calorie tracking | New | Six daily ticks (protein at each meal, vegetables twice, no sugary drinks, dinner protein, water, no stored snacks) plus a meal log: breakfast, lunch, dinner, snack, each entry with food name, grams or servings, kcal, protein, carbs, fat. Saved meals (omelette breakfast, chicken and corn lunch, Amul shake) logged with one tap. Daily totals against your targets (2,000 to 2,100 kcal, 150 to 165 g protein) shown on Today as eaten, burned and remaining. Foods are your own, entered by hand. No barcode scanning or photo recognition. |
 | F10 | Weekly review | New | Sunday summary: average weight, sessions done, average steps, checklist score, average daily kcal and protein, streak, one line on what to change. |
-| F11 | Activity frequency | New | Calendar heatmap of gym, pool, walk and rest days, with weekly counts. |
+| F11 | Activity frequency | New, locked | Calendar heatmap of gym, pool, walk and rest days, with weekly counts. Built last. Shown as a locked card until the first weigh-in at or below 99 kg (the goal weight), then unlocks by itself and stays unlocked. |
 
 **Ideas taken from the other repos**
 
@@ -152,15 +153,16 @@ Machines are chosen over barbells to keep skin friction and spine loading low. E
 
 ## Build phases
 
-Five phases, each ending in something you can use; Phase 0 needs no code.
+Six phases, each ending in something you can use; Phase 0 needs no code.
 
 | Phase | Scope | Done when |
 | --- | --- | --- |
 | 0. Use it now | Install the openGym Android APK, connect Health Connect, enter the weekly plan by hand | You log Monday's session in the app with animations showing |
 | 1. Fork and run | Fork the repo, run `docker compose up`, build the Android app from `frontend/android`, confirm all tests pass | Your own build runs on your phone and the web dashboard opens in a browser |
 | 2. Plan and Today screen | F8 preloaded plan, F6 Today screen with today's session | Opening the app shows today's session in one tap |
-| 3. Watch data | F7 daily activity sync, F11 activity frequency | Yesterday's steps and calories match Samsung Health within 2% |
+| 3. Watch data | F7 daily activity sync, plus weigh-ins from Health Connect (HealthifyMe scale, see below) | Yesterday's steps and calories match Samsung Health within 2%, and the latest weigh-in shows in the app |
 | 4. Diet and review | F9 diet checklist plus calorie tracking (meal log, saved meals, eaten / burned / remaining on Today), F10 weekly review with average kcal and protein, streaks | A saved meal logs in one tap, Today shows eaten, burned and remaining, and the Sunday review appears with every number filled |
+| 5. Goal unlock | F11 activity frequency, locked until a weigh-in at or below 99 kg | The heatmap card shows locked above 99 kg and unlocks by itself on the first weigh-in at 99 kg or less |
 
 **Acceptance rules for every phase**
 
@@ -198,6 +200,8 @@ existing gym engine, exercise library and animations. Add:
   F10 Weekly review every Sunday: average weight, sessions done, average
       steps, checklist score, average kcal and protein, streak.
   F11 Activity frequency: calendar heatmap of gym, pool, walk, rest days.
+      Built last; locked until a weigh-in at or below 99 kg, then
+      unlocks by itself.
 
 RULES
 1. Work one PRD phase at a time. Stop after each phase, show me what
